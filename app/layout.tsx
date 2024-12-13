@@ -1,21 +1,7 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+"use client";
+
+import { Providers } from "./providers";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: "Songs lyrics and chords to Json",
-  description: "Convert songs lyrics with chords to Json app",
-};
 
 export default function RootLayout({
   children,
@@ -24,10 +10,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <title>Songs lyrics and chords to Json</title>
+      <body className="bg-[#18181b]">
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
