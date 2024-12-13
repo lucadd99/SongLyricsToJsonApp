@@ -1,21 +1,16 @@
-import type { Metadata } from "next";
+"use client";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Providers } from "./providers";
 import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
-
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
-export const metadata: Metadata = {
-  title: "Songs lyrics and chords to Json",
-  description: "Convert songs lyrics with chords to Json app",
-};
 
 export default function RootLayout({
   children,
@@ -24,10 +19,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <title>Songs lyrics and chords to Json</title>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
