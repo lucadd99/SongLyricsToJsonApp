@@ -19,20 +19,20 @@ export default function Home() {
   const [currentPinyin, setCurrentPinyin] = useState("");
   const [currentChords, setCurrentChords] = useState(Array);
 
-  // Update JSON for lyrics with chords
   const updateLyricsWithChords = (
     prefix: string,
     lyrics: string,
     pinyin: string,
     chords: unknown[]
   ) => {
-    setLyricsWithChords([
-      {
-        prefix,
-        lyrics: { character: lyrics, pinyin: pinyin },
-        chords: chords,
-      },
-    ]);
+    const data = {
+      lyrics: { character: lyrics, pinyin: pinyin },
+      chords: chords,
+    };
+
+    const lyricsWithChords = prefix ? [{ prefix, ...data }] : [data];
+
+    setLyricsWithChords(lyricsWithChords);
   };
 
   // Delete Prefix
