@@ -388,9 +388,9 @@ export default function Home() {
       </Card>
 
       {/* JSON Output */}
-      <Card className="w-full">
+      <Card className="w-full mb-40">
         <CardBody>
-          <pre className="bg-gray-800 text-white p-4 rounded">
+          <pre className="bg-gray-800 text-white p-4 rounded h-[600px] overflow-scroll">
             {JSON.stringify(
               {
                 title: songTitle,
@@ -399,13 +399,41 @@ export default function Home() {
                 category: songCategory,
                 capo: songCapo,
                 tags: songTags,
-                // ...(yes && { page: songPage }),
                 lyricsWithChords: lyricsWithChords || [],
               },
               null,
               2
             )}
           </pre>
+          <Button
+            size="md"
+            color="success"
+            className="mt-4 w-40 self-center font-bold py-2 px-4 "
+            onPress={() => {
+              const jsonData = {
+                title: songTitle,
+                page: songPage,
+                description: songDescription,
+                category: songCategory,
+                capo: songCapo,
+                tags: songTags,
+                lyricsWithChords: lyricsWithChords || [],
+              };
+              const blob = new Blob([JSON.stringify(jsonData, null, 2)], {
+                type: "application/json",
+              });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement("a");
+              a.href = url;
+              a.download = `${songTitle || "song"}.json`;
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+              URL.revokeObjectURL(url);
+            }}
+          >
+            Download JSON
+          </Button>
         </CardBody>
       </Card>
     </div>
