@@ -9,7 +9,7 @@ import {
   Textarea,
   Checkbox,
 } from "@nextui-org/react";
-
+import { pinyin } from "pinyin-pro";
 type Line = {
   prefix: string;
   lyrics: { character: string; pinyin: string };
@@ -34,6 +34,11 @@ export default function Home() {
     chords: [],
   });
 
+  const convertToPinyin = (character: string): string => {
+    const pinyinArray = pinyin(character, { type: "array" });
+    return pinyinArray.flat().join(" ");
+  };
+
   const addNewLine = () => {
     setLyricsWithChords([...lyricsWithChords, initializeLine()]);
   };
@@ -41,6 +46,13 @@ export default function Home() {
   const updateLine = (index: number, updates: Partial<Line>) => {
     const updatedLines = [...lyricsWithChords];
     updatedLines[index] = { ...updatedLines[index], ...updates };
+
+    if (updates.lyrics?.character) {
+      updatedLines[index].lyrics.pinyin = convertToPinyin(
+        updatedLines[index].lyrics.character
+      );
+    }
+
     setLyricsWithChords(updatedLines);
   };
 
@@ -266,6 +278,7 @@ export default function Home() {
                 <div className="flex justify-between items-center">
                   {/* Prefix Selection */}
                   <div className="flex gap-2">
+                    <p>詞頭 Prefisso:</p>
                     <Checkbox
                       isSelected={line.prefix === "領"}
                       onChange={(isSelected) =>
@@ -287,7 +300,7 @@ export default function Home() {
                       color="danger"
                       onPress={() => deletePrefix(index)}
                     >
-                      Delete Prefix
+                      Delete
                     </Button>
                   </div>
                   <Button
@@ -295,27 +308,16 @@ export default function Home() {
                     color="danger"
                     onPress={() => deleteLine(index)}
                   >
-                    Delete Line
+                    Delete ALL
                   </Button>
                 </div>
                 {/* Lyrics Inputs */}
                 <Textarea
-                  label="Lyrics (Character)"
-                  placeholder="Enter the lyrics in characters"
+                  label="繁體歌詞 Testo (Caratteri)"
                   value={line.lyrics.character}
                   onChange={(e) =>
                     updateLine(index, {
                       lyrics: { ...line.lyrics, character: e.target.value },
-                    })
-                  }
-                />
-                <Textarea
-                  label="Lyrics (Pinyin)"
-                  placeholder="Enter the pinyin for the lyrics"
-                  value={line.lyrics.pinyin}
-                  onChange={(e) =>
-                    updateLine(index, {
-                      lyrics: { ...line.lyrics, pinyin: e.target.value },
                     })
                   }
                 />
@@ -324,8 +326,7 @@ export default function Home() {
                   {line.chords.map((chord, i) => (
                     <div key={i} className="flex gap-4 items-center">
                       <Input
-                        label="Chord"
-                        placeholder="Enter chord"
+                        label="和弦 Accordo"
                         value={chord.chord}
                         onChange={(e) => {
                           const updatedChords = [...line.chords];
@@ -334,8 +335,7 @@ export default function Home() {
                         }}
                       />
                       <Input
-                        label="C Position"
-                        placeholder="Enter character position"
+                        label="和弦位置 Posizione accordo"
                         type="number"
                         value={chord.c_position}
                         onChange={(e) => {
@@ -365,11 +365,12 @@ export default function Home() {
                           updateChords(index, updatedChords);
                         }}
                       >
-                        Delete Chord
+                        Delete
                       </Button>
                     </div>
                   ))}
                   <Button
+                    className="font-bold text-sm"
                     onPress={() =>
                       updateChords(index, [
                         ...line.chords,
@@ -377,12 +378,14 @@ export default function Home() {
                       ])
                     }
                   >
-                    Add Chord
+                    新增和弦 Aggiungi accordo
                   </Button>
                 </div>
               </div>
             ))}
-            <Button onPress={addNewLine}>Add New Line</Button>
+            <Button className="font-bold text-md" onPress={addNewLine}>
+              新增歌詞 Aggiungi testo
+            </Button>
           </div>
         </CardBody>
       </Card>
