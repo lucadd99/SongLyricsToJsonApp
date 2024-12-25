@@ -7,3 +7,147 @@ body {
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif Arial,
     Helvetica, sans-serif;
 }
+body::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #fff;
+  margin-bottom: 80px;
+}
+
+.error-text {
+  text-align: center;
+  font-size: 18px;
+  color: #ff0000;
+  margin-top: 50px;
+}
+
+.song-header-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.song-title {
+  font-size: 21px;
+  font-weight: 600;
+  color: #c50000;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.capo {
+  font-size: 14px;
+  font-weight: 600;
+  color: #c50000;
+}
+
+.description-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: end;
+  margin-bottom: 20px;
+}
+
+.description {
+  font-size: 14px;
+  font-weight: 600;
+  color: #37474f;
+  margin-block-end: auto;
+}
+
+.page {
+  font-size: 14px;
+  font-weight: 600;
+  color: #37474f;
+  margin-top: 2px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.button {
+  margin: 0 5px;
+  padding: 10px;
+  background-color: #007bff;
+  border-radius: 5px;
+  width: 80px;
+  text-align: center;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.lyrics-container {
+  padding: 0 20px;
+}
+
+.line {
+  margin-bottom: 18px;
+  position: relative;
+  /* letter-spacing: 2px; */
+}
+
+.prefix {
+  position: absolute;
+  left: -30px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 25px;
+}
+
+.lyric {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.chord {
+  top: -20;
+  position: absolute;
+  font-weight: 500;
+  color: #c50000;
+}
+
+.action-button-container {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10;
+}
+
+.action-button {
+  background-color: #c53000;
+  padding: 10px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu {
+  background-color: #fff;
+  position: absolute;
+  bottom: 60px;
+  right: 0;
+  padding: 10px;
+  border-radius: 20px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.menu-item {
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: 600;
+  color: black;
+  text-align: center;
+}

@@ -1,0 +1,452 @@
+[
+    {
+        "songId": 3,
+        "page": 65,
+        "title": "上主是我的牧者",
+        "description": "詠 23(22)",
+        "category": "Precatecumenato",
+        "capo": 3,
+        "tags": [
+            "pace",
+            "comunione"
+        ],
+        "lyricsWithChords": [
+            {
+                "prefix": "領:",
+                "lyrics": {
+                    "character": "上主是我的牧者，",
+                    "pinyin": "Shàng zhǔ shì wǒ de mù zhě"
+                },
+                "chords": [
+                    {
+                        "chord": "A-",
+                        "c_position": 0,
+                        "p_position": 1
+                    },
+                    {
+                        "chord": "F",
+                        "c_position": 10,
+                        "p_position": 20
+                    }
+                ]
+            },
+            {
+                "lyrics": {
+                    "character": "我實在一無所缺，",
+                    "pinyin": "Wuo She zai i u suo ciue"
+                },
+                "chords": [
+                    {
+                        "chord": "E",
+                        "c_position": 2,
+                        "p_position": 4
+                    }
+                ]
+            },
+            {
+                "lyrics": {
+                    "character": "祂使我棲息在翠綠的草地上。",
+                    "pinyin": "Ta She Wuo Ci Shi Zai"
+                },
+                "chords": [
+                    {
+                        "chord": "E7",
+                        "c_position": 4,
+                        "p_position": 6
+                    },
+                    {
+                        "chord": "A-",
+                        "c_position": 10,
+                        "p_position": 12
+                    }
+                ],
+                "spacing": 50
+            },
+            {
+                "prefix": "眾:",
+                "lyrics": {
+                    "character": "上主是我的牧者，",
+                    "pinyin": "Shàng zhǔ shì wǒ de mù zhě"
+                },
+                "chords": [
+                    {
+                        "chord": "A-",
+                        "c_position": 0,
+                        "p_position": 1
+                    },
+                    {
+                        "chord": "F",
+                        "c_position": 11,
+                        "p_position": 15
+                    }
+                ]
+            },
+            {
+                "lyrics": {
+                    "character": "我實在一無所缺，",
+                    "pinyin": "Wuo She zai i u suo ciue"
+                },
+                "chords": [
+                    {
+                        "chord": "E",
+                        "c_position": 2,
+                        "p_position": 4
+                    }
+                ]
+            },
+            {
+                "lyrics": {
+                    "character": "祂帶領我走近生命的溪水旁。",
+                    "pinyin": "Ta She Wuo Ci Shi Zai"
+                },
+                "chords": [
+                    {
+                        "chord": "E7",
+                        "c_position": 4,
+                        "p_position": 6
+                    },
+                    {
+                        "chord": "A-",
+                        "c_position": 10,
+                        "p_position": 12
+                    }
+                ],
+                "spacing": 50
+            },
+            {
+                "prefix": "領:",
+                "lyrics": {
+                    "character": "祂復興我的力量而帶領我",
+                    "pinyin": "Shàng zhǔ shì wǒ de mù zhě"
+                },
+                "chords": [
+                    {
+                        "chord": "G",
+                        "c_position": 0,
+                        "p_position": 1
+                    },
+                    {
+                        "chord": "F",
+                        "c_position": 11,
+                        "p_position": 15
+                    }
+                ]
+            },
+            {
+                "lyrics": {
+                    "character": "在愛的道路上。",
+                    "pinyin": "Wuo She zai i u suo ciue"
+                },
+                "chords": [
+                    {
+                        "chord": "E",
+                        "c_position": 2,
+                        "p_position": 4
+                    }
+                ]
+            },
+            {
+                "lyrics": {
+                    "character": "祂復興我的力量而帶領我",
+                    "pinyin": "Shàng zhǔ shì wǒ de mù zhě"
+                },
+                "chords": [
+                    {
+                        "chord": "G",
+                        "c_position": 0,
+                        "p_position": 1
+                    },
+                    {
+                        "chord": "F",
+                        "c_position": 11,
+                        "p_position": 15
+                    }
+                ]
+            },
+            {
+                "lyrics": {
+                    "character": "為了光榮祂的名。",
+                    "pinyin": "Wuo She zai i u suo ciue"
+                },
+                "chords": [
+                    {
+                        "chord": "E",
+                        "c_position": 2,
+                        "p_position": 4
+                    }
+                ],
+                "spacing": 50
+            },
+            {
+                "prefix": "領:",
+                "lyrics": {
+                    "character": "縱然我要走過陰森的幽谷，",
+                    "pinyin": "Shàng zhǔ shì wǒ de mù zhě"
+                },
+                "chords": [
+                    {
+                        "chord": "G",
+                        "c_position": 0,
+                        "p_position": 1
+                    },
+                    {
+                        "chord": "F",
+                        "c_position": 11,
+                        "p_position": 15
+                    }
+                ]
+            },
+            {
+                "lyrics": {
+                    "character": "我也不怕兇險，",
+                    "pinyin": "Wuo She zai i u suo ciue"
+                },
+                "chords": [
+                    {
+                        "chord": "E",
+                        "c_position": 2,
+                        "p_position": 4
+                    }
+                ]
+            },
+            {
+                "lyrics": {
+                    "character": "因為你，因為你，因為你",
+                    "pinyin": "Wuo She zai i u suo ciue"
+                },
+                "chords": [
+                    {
+                        "chord": "E7",
+                        "c_position": 0,
+                        "p_position": 2
+                    }
+                ]
+            },
+            {
+                "lyrics": {
+                    "character": "與我同在，",
+                    "pinyin": "Wuo She zai i u suo ciue"
+                },
+                "chords": [
+                    {
+                        "chord": "A-",
+                        "c_position": 4,
+                        "p_position": 7
+                    }
+                ]
+            },
+            {
+                "lyrics": {
+                    "character": "你的牧杖和牧棒使我欣慰，",
+                    "pinyin": "Shàng zhǔ shì wǒ de mù zhě"
+                },
+                "chords": [
+                    {
+                        "chord": "G",
+                        "c_position": 0,
+                        "p_position": 1
+                    },
+                    {
+                        "chord": "F",
+                        "c_position": 11,
+                        "p_position": 15
+                    }
+                ]
+            },
+            {
+                "lyrics": {
+                    "character": "看 ! 使我欣慰。",
+                    "pinyin": "Wuo She zai i u suo ciue"
+                },
+                "chords": [
+                    {
+                        "chord": "G",
+                        "c_position": 4,
+                        "p_position": 7
+                    }
+                ],
+                "spacing": 50
+            },
+            {
+                "prefix": "領:",
+                "lyrics": {
+                    "character": "在我的敵人面前，",
+                    "pinyin": "Shàng zhǔ shì wǒ de mù zhě"
+                },
+                "chords": [
+                    {
+                        "chord": "G",
+                        "c_position": 0,
+                        "p_position": 1
+                    }
+                ]
+            },
+            {
+                "lyrics": {
+                    "character": "你為我擺設宴席，",
+                    "pinyin": "Shàng zhǔ shì wǒ de mù zhě"
+                },
+                "chords": [
+                    {
+                        "chord": "F",
+                        "c_position": 2,
+                        "p_position": 3
+                    },
+                    {
+                        "chord": "E",
+                        "c_position": 8,
+                        "p_position": 10
+                    }
+                ]
+            },
+            {
+                "lyrics": {
+                    "character": "在我的頭上你傅香油，",
+                    "pinyin": "Shàng zhǔ shì wǒ de mù zhě"
+                },
+                "chords": [
+                    {
+                        "chord": "G",
+                        "c_position": 0,
+                        "p_position": 1
+                    },
+                    {
+                        "chord": "F",
+                        "c_position": 11,
+                        "p_position": 15
+                    }
+                ]
+            },
+            {
+                "lyrics": {
+                    "character": "看 ! 使我的杯爵滿溢。",
+                    "pinyin": "Wuo She zai i u suo ciue"
+                },
+                "chords": [
+                    {
+                        "chord": "G",
+                        "c_position": 4,
+                        "p_position": 7
+                    }
+                ],
+                "spacing": 50
+            },
+            {
+                "prefix": "領:",
+                "lyrics": {
+                    "character": "是的，你的喜樂與熱愛",
+                    "pinyin": "Shàng zhǔ shì wǒ de mù zhě"
+                },
+                "chords": [
+                    {
+                        "chord": "G",
+                        "c_position": 0,
+                        "p_position": 1
+                    },
+                    {
+                        "chord": "F",
+                        "c_position": 11,
+                        "p_position": 15
+                    }
+                ]
+            },
+            {
+                "lyrics": {
+                    "character": "將陪伴我。",
+                    "pinyin": "Wuo She zai i u suo ciue"
+                },
+                "chords": [
+                    {
+                        "chord": "E",
+                        "c_position": 2,
+                        "p_position": 4
+                    }
+                ]
+            },
+            {
+                "prefix": "眾:",
+                "lyrics": {
+                    "character": "是的，我將永遠地",
+                    "pinyin": "Shàng zhǔ shì wǒ de mù zhě"
+                },
+                "chords": [
+                    {
+                        "chord": "G",
+                        "c_position": 0,
+                        "p_position": 1
+                    },
+                    {
+                        "chord": "F",
+                        "c_position": 11,
+                        "p_position": 15
+                    }
+                ]
+            },
+            {
+                "lyrics": {
+                    "character": "居住在你的殿裏。",
+                    "pinyin": "Wuo She zai i u suo ciue"
+                },
+                "chords": [
+                    {
+                        "chord": "E",
+                        "c_position": 2,
+                        "p_position": 4
+                    }
+                ],
+                "spacing": 50
+            },
+            {
+                "prefix": "眾:",
+                "lyrics": {
+                    "character": "上主是我的牧者，",
+                    "pinyin": "Shàng zhǔ shì wǒ de mù zhě"
+                },
+                "chords": [
+                    {
+                        "chord": "A-",
+                        "c_position": 0,
+                        "p_position": 1
+                    },
+                    {
+                        "chord": "F",
+                        "c_position": 11,
+                        "p_position": 15
+                    }
+                ]
+            },
+            {
+                "lyrics": {
+                    "character": "我實在一無所缺，",
+                    "pinyin": "Wuo She zai i u suo ciue"
+                },
+                "chords": [
+                    {
+                        "chord": "E",
+                        "c_position": 2,
+                        "p_position": 4
+                    }
+                ]
+            },
+            {
+                "lyrics": {
+                    "character": "祂帶領我走近生命的溪水旁。",
+                    "pinyin": "Ta She Wuo Ci Shi Zai"
+                },
+                "chords": [
+                    {
+                        "chord": "E7",
+                        "c_position": 4,
+                        "p_position": 6
+                    },
+                    {
+                        "chord": "A-",
+                        "c_position": 10,
+                        "p_position": 12
+                    }
+                ],
+                "spacing": 50
+            }
+        ]
+    }
+]

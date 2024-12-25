@@ -1,6 +1,6 @@
 "use client";
 import { TitleFieldTop } from "@/components/TitleField-top";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Input,
   Card,
@@ -10,10 +10,12 @@ import {
   Checkbox,
 } from "@nextui-org/react";
 import { pinyin } from "pinyin-pro";
+import LyricsScreen from "@/components/songLyricsOutput";
 type Line = {
   prefix: string;
   lyrics: { character: string; pinyin: string };
   chords: { chord: string; c_position: any; p_position: any }[];
+  spacing: number;
 };
 
 export default function Home() {
@@ -23,15 +25,36 @@ export default function Home() {
   const [songCategory, setSongCategory] = useState("");
   const [songCapo, setSongCapo] = useState<number>(0);
   const [songTags, setSongTags] = useState<string[]>([]);
-
-  // const [yes, setYes] = useState(false);
+  const [spacing, setSpacing] = useState(0);
+  const [finalJson, setFinalJson] = useState([]);
 
   const [lyricsWithChords, setLyricsWithChords] = useState<Line[]>([]);
+
+  useEffect(() => {
+    setFinalJson({
+      title: songTitle,
+      page: songPage,
+      description: songDescription,
+      category: songCategory,
+      capo: songCapo,
+      tags: songTags,
+      lyricsWithChords: lyricsWithChords || [],
+    });
+  }, [
+    songTitle,
+    songPage,
+    songDescription,
+    songCategory,
+    songCapo,
+    songTags,
+    lyricsWithChords,
+  ]);
 
   const initializeLine = (): Line => ({
     prefix: "",
     lyrics: { character: "", pinyin: "" },
     chords: [],
+    spacing: spacing,
   });
 
   const convertToPinyin = (character: string): string => {
@@ -76,10 +99,11 @@ export default function Home() {
           : [...prev, tags] // Add if not selected
     );
   };
+
   return (
     <div className="flex flex-col items-start min-h-screen justify-start gap-8 p-5">
       <TitleFieldTop />
-      <Card className="w-full">
+      <Card className="w-3/4 self-center">
         <CardBody>
           <div className="flex flex-col gap-4">
             {/* Song Title Input */}
@@ -167,7 +191,7 @@ export default function Home() {
               Scegli etichette: <br />
               選擇標籤:
             </p>
-            <div className="flex gap-2">
+            <div className="flex flex-col gap-2">
               <p className="text-[12px]">
                 Tempo liturgico:
                 <br /> 禮儀年曆:
@@ -208,7 +232,7 @@ export default function Home() {
                 五旬期 Pentecoste
               </Checkbox>
             </div>
-            <div className="flex gap-2 ">
+            <div className="flex flex-col gap-2 ">
               <p className="text-[12px]">
                 Ordine liturgico:
                 <br /> 禮儀順序:
@@ -267,7 +291,7 @@ export default function Home() {
         </CardBody>
       </Card>
       {/* Lyrics Lines Section */}
-      <Card className="w-full">
+      <Card className="w-3/4 self-center">
         <CardBody>
           <div className="flex flex-col gap-4">
             {lyricsWithChords.map((line, index) => (
@@ -324,50 +348,57 @@ export default function Home() {
                 {/* Chords Inputs */}
                 <div className="flex flex-col gap-2">
                   {line.chords.map((chord, i) => (
-                    <div key={i} className="flex gap-4 items-center">
-                      <Input
-                        label="和弦 Accordo"
-                        value={chord.chord}
-                        onChange={(e) => {
-                          const updatedChords = [...line.chords];
-                          updatedChords[i].chord = e.target.value;
-                          updateChords(index, updatedChords);
-                        }}
-                      />
-                      <Input
-                        label="和弦位置 Posizione accordo"
-                        type="number"
-                        value={chord.c_position}
-                        onChange={(e) => {
-                          const updatedChords = [...line.chords];
-                          updatedChords[i].c_position = Number(e.target.value);
-                          updateChords(index, updatedChords);
-                        }}
-                      />
-                      <Input
-                        label="P Position"
-                        placeholder="Enter pinyin position"
-                        type="number"
-                        value={chord.p_position}
-                        onChange={(e) => {
-                          const updatedChords = [...line.chords];
-                          updatedChords[i].p_position = Number(e.target.value);
-                          updateChords(index, updatedChords);
-                        }}
-                      />
-                      <Button
-                        size="sm"
-                        color="danger"
-                        onPress={() => {
-                          const updatedChords = line.chords.filter(
-                            (_, ci) => ci !== i
-                          );
-                          updateChords(index, updatedChords);
-                        }}
-                      >
-                        Delete
-                      </Button>
-                    </div>
+                    <>
+                      <div key={i} className="flex gap-4 items-center">
+                        <Input
+                          label="和弦 Accordo"
+                          value={chord.chord}
+                          onChange={(e) => {
+                            const updatedChords = [...line.chords];
+                            updatedChords[i].chord = e.target.value;
+                            updateChords(index, updatedChords);
+                          }}
+                        />
+                        <Input
+                          label="和弦位置 Posizione accordo"
+                          type="number"
+                          value={chord.c_position}
+                          onChange={(e) => {
+                            const updatedChords = [...line.chords];
+                            updatedChords[i].c_position = Number(
+                              e.target.value
+                            );
+                            updateChords(index, updatedChords);
+                          }}
+                        />
+                        <Input
+                          label="P Position"
+                          placeholder="Enter pinyin position"
+                          type="number"
+                          value={chord.p_position}
+                          onChange={(e) => {
+                            const updatedChords = [...line.chords];
+                            updatedChords[i].p_position = Number(
+                              e.target.value
+                            );
+                            updateChords(index, updatedChords);
+                          }}
+                        />
+                        <Button
+                          size="sm"
+                          color="danger"
+                          onPress={() => {
+                            const updatedChords = line.chords.filter(
+                              (_, ci) => ci !== i
+                            );
+                            updateChords(index, updatedChords);
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                      <div></div>
+                    </>
                   ))}
                   <Button
                     className="font-bold text-sm"
@@ -381,6 +412,16 @@ export default function Home() {
                     新增和弦 Aggiungi accordo
                   </Button>
                 </div>
+                <Checkbox
+                  isSelected={line.spacing === 50}
+                  onChange={() => {
+                    const newSpacing = spacing === 0 ? 50 : 0;
+                    setSpacing(newSpacing);
+                    updateLine(index, { spacing: newSpacing });
+                  }}
+                >
+                  新增空白 Aggiungi spazio
+                </Checkbox>
               </div>
             ))}
             <Button className="font-bold text-md" onPress={addNewLine}>
@@ -391,54 +432,64 @@ export default function Home() {
       </Card>
 
       {/* JSON Output */}
-      <Card className="w-full mb-40">
-        <CardBody>
-          <pre className="bg-gray-800 text-white p-4 rounded h-[600px] overflow-scroll">
-            {JSON.stringify(
-              {
-                title: songTitle,
-                page: songPage,
-                description: songDescription,
-                category: songCategory,
-                capo: songCapo,
-                tags: songTags,
-                lyricsWithChords: lyricsWithChords || [],
-              },
-              null,
-              2
-            )}
-          </pre>
-          <Button
-            size="md"
-            color="success"
-            className="mt-4 w-40 self-center font-bold py-2 px-4 "
-            onPress={() => {
-              const jsonData = {
-                title: songTitle,
-                page: songPage,
-                description: songDescription,
-                category: songCategory,
-                capo: songCapo,
-                tags: songTags,
-                lyricsWithChords: lyricsWithChords || [],
-              };
-              const blob = new Blob([JSON.stringify(jsonData, null, 2)], {
-                type: "application/json",
-              });
-              const url = URL.createObjectURL(blob);
-              const a = document.createElement("a");
-              a.href = url;
-              a.download = `${songTitle || "song"}.json`;
-              document.body.appendChild(a);
-              a.click();
-              document.body.removeChild(a);
-              URL.revokeObjectURL(url);
-            }}
-          >
-            Download JSON
-          </Button>
-        </CardBody>
-      </Card>
+      <div className="w-full flex self-center   max-md:flex-col max-md:items-center">
+        <div className="w-1/2 flex flex-col ">
+          <Card className="w-[375px] h-[680px]  flex self-center ml-10">
+            <CardBody className="scrollbar-hide">
+              <LyricsScreen selectedSong={finalJson} />
+            </CardBody>
+          </Card>
+        </div>
+        <Card className="w-[505px]  mb-40 max-md:w-full">
+          <CardBody>
+            <pre className="bg-gray-800 text-white p-4 rounded h-[600px] overflow-scroll scrollbar-hide">
+              {JSON.stringify(
+                {
+                  title: songTitle,
+                  page: songPage,
+                  description: songDescription,
+                  category: songCategory,
+                  capo: songCapo,
+                  tags: songTags,
+                  lyricsWithChords: lyricsWithChords || [],
+                },
+                null,
+                2
+              )}
+            </pre>
+            <Button
+              size="md"
+              color="success"
+              className="mt-4 w-40 self-center font-bold py-2 px-4 "
+              onPress={() => {
+                const jsonData = {
+                  title: songTitle,
+                  page: songPage,
+                  description: songDescription,
+                  category: songCategory,
+                  capo: songCapo,
+                  tags: songTags,
+                  lyricsWithChords: lyricsWithChords || [],
+                };
+
+                const blob = new Blob([JSON.stringify(jsonData, null, 2)], {
+                  type: "application/json",
+                });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = `${songTitle || "song"}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+              }}
+            >
+              Download JSON
+            </Button>
+          </CardBody>
+        </Card>
+      </div>
     </div>
   );
 }

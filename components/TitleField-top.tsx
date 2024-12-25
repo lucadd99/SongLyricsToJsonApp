@@ -2,7 +2,7 @@ import { Card, CardHeader, CardBody } from "@nextui-org/card";
 import { Divider } from "@nextui-org/divider";
 export const TitleFieldTop = () => {
   return (
-    <Card className="w-full">
+    <Card className="w-3/4 self-center">
       <CardHeader className="flex gap-3">
         <p className="font-bold text-xl">
           Convert song's lyrics and chords to Json format
