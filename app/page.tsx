@@ -18,15 +18,24 @@ type Line = {
   spacing: number;
 };
 
+type Song = {
+  title: string;
+  page: number;
+  description: string;
+  category: string;
+  capo: number;
+  tags: string[];
+  lyricsWithChords: Line[];
+};
 export default function Home() {
   const [songTitle, setSongTitle] = useState("");
-  const [songPage, setSongPage] = useState("");
+  const [songPage, setSongPage] = useState(Number(""));
   const [songDescription, setSongDescription] = useState("");
   const [songCategory, setSongCategory] = useState("");
   const [songCapo, setSongCapo] = useState<number>(0);
   const [songTags, setSongTags] = useState<string[]>([]);
   const [spacing, setSpacing] = useState(0);
-  const [finalJson, setFinalJson] = useState([]);
+  const [finalJson, setFinalJson] = useState<Song | null>(null);
 
   const [lyricsWithChords, setLyricsWithChords] = useState<Line[]>([]);
 
@@ -118,8 +127,8 @@ export default function Home() {
             <Input
               label="歌曲頁數(歌本的頁數) / Numero pagina del canto"
               className="w-2/4"
-              value={songPage}
-              onChange={(e) => setSongPage(e.target.value)}
+              value={songPage.toString()}
+              onChange={(e) => setSongPage(Number(e.target.value))}
             />
             {/* Song description Input */}
             <Input
