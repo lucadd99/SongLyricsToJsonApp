@@ -313,17 +313,17 @@ export default function Home() {
                   <div className="flex gap-2">
                     <p>詞頭 Prefisso:</p>
                     <Checkbox
-                      isSelected={line.prefix === "領"}
+                      isSelected={line.prefix === "領:"}
                       onChange={(isSelected) =>
-                        updateLine(index, { prefix: isSelected ? "領" : "" })
+                        updateLine(index, { prefix: isSelected ? "領:" : "" })
                       }
                     >
                       領
                     </Checkbox>
                     <Checkbox
-                      isSelected={line.prefix === "眾"}
+                      isSelected={line.prefix === "眾:"}
                       onChange={(isSelected) =>
-                        updateLine(index, { prefix: isSelected ? "眾" : "" })
+                        updateLine(index, { prefix: isSelected ? "眾:" : "" })
                       }
                     >
                       眾
@@ -355,59 +355,63 @@ export default function Home() {
                   }
                 />
                 {/* Chords Inputs */}
-                <div className="flex flex-col gap-2">
+                <div key={index} className="flex flex-col gap-2">
                   {line.chords.map((chord, i) => (
-                    <>
-                      <div key={i} className="flex gap-4 items-center">
-                        <Input
-                          label="和弦 Accordo"
-                          value={chord.chord}
-                          onChange={(e) => {
-                            const updatedChords = [...line.chords];
-                            updatedChords[i].chord = e.target.value;
-                            updateChords(index, updatedChords);
-                          }}
-                        />
-                        <Input
-                          label="和弦位置 Posizione accordo"
-                          type="number"
-                          value={chord.c_position}
-                          onChange={(e) => {
-                            const updatedChords = [...line.chords];
-                            updatedChords[i].c_position = Number(
-                              e.target.value
-                            );
-                            updateChords(index, updatedChords);
-                          }}
-                        />
-                        <Input
-                          label="P Position"
-                          placeholder="Enter pinyin position"
-                          type="number"
-                          value={chord.p_position}
-                          onChange={(e) => {
-                            const updatedChords = [...line.chords];
-                            updatedChords[i].p_position = Number(
-                              e.target.value
-                            );
-                            updateChords(index, updatedChords);
-                          }}
-                        />
-                        <Button
-                          size="sm"
-                          color="danger"
-                          onPress={() => {
-                            const updatedChords = line.chords.filter(
-                              (_, ci) => ci !== i
-                            );
-                            updateChords(index, updatedChords);
-                          }}
-                        >
-                          Delete
-                        </Button>
-                      </div>
-                      <div></div>
-                    </>
+                    <div key={i} className="flex gap-4 items-center">
+                      <Input
+                        label="和弦 Accordo"
+                        value={chord.chord}
+                        onChange={(e) => {
+                          const updatedChords = [...line.chords];
+                          updatedChords[i].chord = e.target.value;
+                          updateChords(index, updatedChords);
+                        }}
+                      />
+                      <Input
+                        label="C Position"
+                        type="number"
+                        value={
+                          chord.c_position === null ? "" : chord.c_position
+                        }
+                        onChange={(e) => {
+                          const value =
+                            e.target.value === ""
+                              ? null
+                              : Number(e.target.value);
+                          const updatedChords = [...line.chords];
+                          updatedChords[i].c_position = value;
+                          updateChords(index, updatedChords);
+                        }}
+                      />
+                      {/* <Input
+                        label="P Position"
+                        type="number"
+                        value={
+                          chord.p_position === null ? "" : chord.p_position
+                        }
+                        onChange={(e) => {
+                          const value =
+                            e.target.value === ""
+                              ? null
+                              : Number(e.target.value);
+                          const updatedChords = [...line.chords];
+                          updatedChords[i].p_position = value;
+                          updateChords(index, updatedChords);
+                        }}
+                      /> */}
+                      <Button
+                        size="sm"
+                        color="danger"
+                        onPress={() => {
+                          const updatedChords = line.chords.filter(
+                            (_, ci) => ci !== i
+                          );
+                          updateChords(index, updatedChords);
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </div>
                   ))}
                   <Button
                     className="font-bold text-sm"

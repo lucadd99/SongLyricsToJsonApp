@@ -143,9 +143,13 @@ const LyricsScreen = ({ selectedSong }: any) => {
                   style={{
                     left: `${
                       lyricsInPinYin
-                        ? singleChord.p_position
-                        : singleChord.c_position
-                    }ch`,
+                        ? singleChord.p_position === 0 
+                          ? 0 
+                          : singleChord.p_position * 10 - 5
+                        : singleChord.c_position === 0 
+                          ? 0 
+                          : singleChord.c_position * 10 - 5
+                    }px`,
                     fontSize: `${currentFontSize * 0.9}px`,
                   }}
                 >
