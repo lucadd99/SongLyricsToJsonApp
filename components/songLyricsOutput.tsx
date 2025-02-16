@@ -28,9 +28,9 @@ const LyricsScreen = ({ selectedSong }: any) => {
   const [lyricsInPinYin, setLyricsInPinYin] = useState(false);
 
   useEffect(() => {
-    document.title = selectedSong?.title || "Song not found";
-    setLyricsData(selectedSong?.lyricsWithChords || []);
-  }, [selectedSong]);
+    document.title =  "lyrics and chords to Json format";
+    
+  }, []);
 
   if (!selectedSong) {
     return <div className="container error-text">Song not found.</div>;
