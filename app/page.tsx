@@ -67,8 +67,10 @@ export default function Home() {
   });
 
   const convertToPinyin = (character: string): string => {
-    const pinyinArray = pinyin(character, { type: "array" });
-    return pinyinArray.flat().join(" ");
+    return pinyin(character, { type: "array", toneType: "symbol" }) // Get Pinyin array
+      .join(" ") // Join with spaces
+      .replace(/\s，/g, ",") // Replace " space + ，" with ","
+      .replace(/\s。\s/g, "."); // Replace " space + 。 + space +" with "."
   };
 
   const addNewLine = () => {
