@@ -68,9 +68,20 @@ export default function Home() {
 
   const convertToPinyin = (character: string): string => {
     return pinyin(character, { type: "array", toneType: "symbol" }) // Get Pinyin array
-      .join(" ") // Join with spaces
-      .replace(/\s，/g, ",") // Replace " space + ，" with ","
-      .replace(/\s。\s/g, "."); // Replace " space + 。 + space +" with "."
+      .map((char, index, array) => {
+        // If both current & next characters are letters (A-Z or a-z), add space
+        if (
+          /[a-zA-Z]/.test(char) &&
+          index < array.length - 1 &&
+          /[a-zA-Z]/.test(array[index + 1])
+        ) {
+          return char + " ";
+        }
+        return char; // Otherwise, return as is
+      })
+      .join("") // Join without adding unnecessary spaces
+      .replace(/，/g, ", ") // Replace ， with ,
+      .replace(/。/g, "."); // Replace 。 with .
   };
 
   const addNewLine = () => {
