@@ -281,11 +281,18 @@ export default function Home() {
                 聖體 Frazione del pane
               </Checkbox>
               <Checkbox
-                value={"communione"}
-                isSelected={songTags.includes("communione")}
+                value={"comunione"}
+                isSelected={songTags.includes("comunione")}
                 onChange={(e) => toggleTags(e.target.value)}
               >
                 聖血 Communione
+              </Checkbox>
+              <Checkbox
+                value={"finale"}
+                isSelected={songTags.includes("finale")}
+                onChange={(e) => toggleTags(e.target.value)}
+              >
+                結束 Finale
               </Checkbox>
               <Checkbox
                 value={"verginemaria"}
