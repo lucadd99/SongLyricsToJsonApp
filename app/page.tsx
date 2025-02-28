@@ -39,6 +39,8 @@ export default function Home() {
 
   const [lyricsWithChords, setLyricsWithChords] = useState<Line[]>([]);
 
+  const [trigger, setTrigger] = useState(0); //for re-render
+
   useEffect(() => {
     setFinalJson({
       title: songTitle,
@@ -47,8 +49,9 @@ export default function Home() {
       category: songCategory,
       capo: songCapo,
       tags: songTags,
-      lyricsWithChords: lyricsWithChords || [],
+      lyricsWithChords,
     });
+    setTrigger((prev) => prev + 1); // Force re-render
   }, [
     songTitle,
     songPage,
@@ -85,7 +88,10 @@ export default function Home() {
   };
 
   const addNewLine = () => {
-    setLyricsWithChords([...lyricsWithChords, initializeLine()]);
+    setLyricsWithChords([
+      ...lyricsWithChords,
+      { ...initializeLine(), spacing: 0 },
+    ]);
   };
 
   const updateLine = (index: number, updates: Partial<Line>) => {
@@ -128,199 +134,211 @@ export default function Home() {
       <Card className="w-3/4 self-center">
         <CardBody>
           <div className="flex flex-col gap-4">
-            {/* Song Title Input */}
-            <Input
-              label="歌名 / Titolo del canto"
-              className="w-2/4"
-              value={songTitle}
-              onChange={(e) => setSongTitle(e.target.value)}
-            />
+            <div className="flex flex-row gap-2">
+              {/* Song Title Input */}
+              <Input
+                label="歌名 / Titolo del canto"
+                className="w-80"
+                value={songTitle}
+                onChange={(e) => setSongTitle(e.target.value)}
+              />
 
-            {/* Song Page Input */}
-            <Input
-              label="歌曲頁數(歌本的頁數) / Numero pagina del canto"
-              className="w-2/4"
-              value={songPage.toString()}
-              onChange={(e) => setSongPage(Number(e.target.value))}
-            />
-            {/* Song description Input */}
-            <Input
-              label="歌曲說明(ex:詠 22) / Descrizione del canto(ex:Sal 22) "
-              className="w-2/4"
-              value={songDescription}
-              onChange={(e) => setSongDescription(e.target.value)}
-            />
-            {/* Song category Input */}
-            <p className="text-sm">
-              Scegli categoria:
-              <br />
-              選擇分類:
-            </p>
-            <div className="flex gap-2">
-              <Checkbox
-                isSelected={songCategory === "Precatecumenato"}
-                onChange={() =>
-                  setSongCategory(
-                    songCategory === "Precatecumenato" ? "" : "Precatecumenato"
-                  )
-                }
-              >
-                慕道前期 Precatecumenato
-              </Checkbox>
-              <Checkbox
-                isSelected={songCategory === "Catecumenato"}
-                onChange={() =>
-                  setSongCategory(
-                    songCategory === "Catecumenato" ? "" : "Catecumenato"
-                  )
-                }
-              >
-                慕道期 Catecumenato
-              </Checkbox>
-              <Checkbox
-                isSelected={songCategory === "Elezione"}
-                onChange={() =>
-                  setSongCategory(songCategory === "Elezione" ? "" : "Elezione")
-                }
-              >
-                揀選期 Elezione
-              </Checkbox>
-              <Checkbox
-                isSelected={songCategory === "Liturgia"}
-                onChange={() =>
-                  setSongCategory(songCategory === "Liturgia" ? "" : "Liturgia")
-                }
-              >
-                禮儀 Liturgia
-              </Checkbox>
+              {/* Song Page Input */}
+              <Input
+                label="歌本頁數/Numero pagina"
+                className="w-64"
+                value={songPage.toString()}
+                onChange={(e) => setSongPage(Number(e.target.value))}
+              />
+              {/* Song description Input */}
+              <Input
+                label="歌曲說明(ex:詠 22) / Descrizione del canto(ex:Sal 22) "
+                className="w-[400px]"
+                value={songDescription}
+                onChange={(e) => setSongDescription(e.target.value)}
+              />
             </div>
-            {/* Song capo Input */}
-            <p className="text-sm">
-              Inserisci Capo:
-              <br />
-              輸入變調夾:
-            </p>
-            <Input
-              label="Song Capo"
-              placeholder="Enter Capo position"
-              className="w-28"
-              type="number"
-              value={songCapo.toString()}
-              onChange={(e) => setSongCapo(Number(e.target.value))}
-            />
-            {/* Song tags Input */}
-            <p className="text-sm">
-              Scegli etichette: <br />
-              選擇標籤:
-            </p>
-            <div className="flex flex-col gap-2">
-              <p className="text-[12px]">
-                Tempo liturgico:
-                <br /> 禮儀年曆:
+            <div className="flex flex-row gap-5 ">
+              {/* Song category Input */}
+              <p className="text-sm">
+                Scegli categoria:
+                <br />
+                選擇分類:
               </p>
-              <Checkbox
-                value={"avvento"}
-                isSelected={songTags.includes("avvento")}
-                onChange={(e) => toggleTags(e.target.value)}
-              >
-                降臨期 Avvento
-              </Checkbox>
-              <Checkbox
-                value={"natale"}
-                isSelected={songTags.includes("natale")}
-                onChange={(e) => toggleTags(e.target.value)}
-              >
-                聖誕期 Natale
-              </Checkbox>
-              <Checkbox
-                value={"quaresima"}
-                isSelected={songTags.includes("quaresima")}
-                onChange={(e) => toggleTags(e.target.value)}
-              >
-                四旬期 Quaresima
-              </Checkbox>
-              <Checkbox
-                value={"pasqua"}
-                isSelected={songTags.includes("pasqua")}
-                onChange={(e) => toggleTags(e.target.value)}
-              >
-                復活期 Pasqua
-              </Checkbox>
-              <Checkbox
-                value={"pentecoste"}
-                isSelected={songTags.includes("pentecoste")}
-                onChange={(e) => toggleTags(e.target.value)}
-              >
-                五旬期 Pentecoste
-              </Checkbox>
+              <div className="flex gap-2 pr-2 border-r-2 border-black">
+                <Checkbox
+                  isSelected={songCategory === "Precatecumenato"}
+                  onChange={() =>
+                    setSongCategory(
+                      songCategory === "Precatecumenato"
+                        ? ""
+                        : "Precatecumenato"
+                    )
+                  }
+                >
+                  慕道前期 Precatecumenato
+                </Checkbox>
+                <Checkbox
+                  isSelected={songCategory === "Catecumenato"}
+                  onChange={() =>
+                    setSongCategory(
+                      songCategory === "Catecumenato" ? "" : "Catecumenato"
+                    )
+                  }
+                >
+                  慕道期 Catecumenato
+                </Checkbox>
+                <Checkbox
+                  isSelected={songCategory === "Elezione"}
+                  onChange={() =>
+                    setSongCategory(
+                      songCategory === "Elezione" ? "" : "Elezione"
+                    )
+                  }
+                >
+                  揀選期 Elezione
+                </Checkbox>
+                <Checkbox
+                  isSelected={songCategory === "Liturgia"}
+                  onChange={() =>
+                    setSongCategory(
+                      songCategory === "Liturgia" ? "" : "Liturgia"
+                    )
+                  }
+                >
+                  禮儀 Liturgia
+                </Checkbox>
+              </div>
+              {/* Song capo Input */}
+              <p className="text-sm">
+                Inserisci Capo:
+                <br />
+                輸入變調夾:
+              </p>
+              <Input
+                label="Song Capo"
+                placeholder="Enter Capo position"
+                className="w-28"
+                type="number"
+                value={songCapo.toString()}
+                onChange={(e) => setSongCapo(Number(e.target.value))}
+              />
             </div>
-            <div className="flex flex-col gap-2 ">
-              <p className="text-[12px]">
-                Ordine liturgico:
-                <br /> 禮儀順序:
+            <div className="flex flex-row gap-10">
+              {/* Song tags Input */}
+              <p className="text-sm">
+                Scegli etichette: <br />
+                選擇標籤:
               </p>
-              <Checkbox
-                value={"ingresso"}
-                isSelected={songTags.includes("ingresso")}
-                onChange={(e) => toggleTags(e.target.value)}
-              >
-                進堂 Ingresso
-              </Checkbox>
-              <Checkbox
-                value={"pace"}
-                isSelected={songTags.includes("pace")}
-                onChange={(e) => toggleTags(e.target.value)}
-              >
-                平安與奉獻 Pace e Offertorio
-              </Checkbox>
-              <Checkbox
-                value={"pane"}
-                isSelected={songTags.includes("pane")}
-                onChange={(e) => toggleTags(e.target.value)}
-              >
-                聖體 Frazione del pane
-              </Checkbox>
-              <Checkbox
-                value={"comunione"}
-                isSelected={songTags.includes("comunione")}
-                onChange={(e) => toggleTags(e.target.value)}
-              >
-                聖血 Communione
-              </Checkbox>
-              <Checkbox
-                value={"finale"}
-                isSelected={songTags.includes("finale")}
-                onChange={(e) => toggleTags(e.target.value)}
-              >
-                結束 Finale
-              </Checkbox>
-              <Checkbox
-                value={"verginemaria"}
-                isSelected={songTags.includes("verginemaria")}
-                onChange={(e) => toggleTags(e.target.value)}
-              >
-                聖母的歌曲 Canti della Vergine
-              </Checkbox>
-              <Checkbox
-                value={"bambini"}
-                isSelected={songTags.includes("bambini")}
-                onChange={(e) => toggleTags(e.target.value)}
-              >
-                小孩的歌曲 Canti della Bambini
-              </Checkbox>
-              <Checkbox
-                value={"lodivespri"}
-                isSelected={songTags.includes("lodivespri")}
-                onChange={(e) => toggleTags(e.target.value)}
-              >
-                晨禱與晚禱 Lodi e Vespri
-              </Checkbox>
+              <div className="flex flex-col gap-2">
+                <p className="text-[12px]">
+                  Tempo liturgico:
+                  <br /> 禮儀年曆:
+                </p>
+                <Checkbox
+                  value={"avvento"}
+                  isSelected={songTags.includes("avvento")}
+                  onChange={(e) => toggleTags(e.target.value)}
+                >
+                  降臨期 Avvento
+                </Checkbox>
+                <Checkbox
+                  value={"natale"}
+                  isSelected={songTags.includes("natale")}
+                  onChange={(e) => toggleTags(e.target.value)}
+                >
+                  聖誕期 Natale
+                </Checkbox>
+                <Checkbox
+                  value={"quaresima"}
+                  isSelected={songTags.includes("quaresima")}
+                  onChange={(e) => toggleTags(e.target.value)}
+                >
+                  四旬期 Quaresima
+                </Checkbox>
+                <Checkbox
+                  value={"pasqua"}
+                  isSelected={songTags.includes("pasqua")}
+                  onChange={(e) => toggleTags(e.target.value)}
+                >
+                  復活期 Pasqua
+                </Checkbox>
+                <Checkbox
+                  value={"pentecoste"}
+                  isSelected={songTags.includes("pentecoste")}
+                  onChange={(e) => toggleTags(e.target.value)}
+                >
+                  五旬期 Pentecoste
+                </Checkbox>
+              </div>
+              <div className="flex flex-col gap-2 ">
+                <p className="text-[12px]">
+                  Ordine liturgico:
+                  <br /> 禮儀順序:
+                </p>
+                <Checkbox
+                  value={"ingresso"}
+                  isSelected={songTags.includes("ingresso")}
+                  onChange={(e) => toggleTags(e.target.value)}
+                >
+                  進堂 Ingresso
+                </Checkbox>
+                <Checkbox
+                  value={"pace"}
+                  isSelected={songTags.includes("pace")}
+                  onChange={(e) => toggleTags(e.target.value)}
+                >
+                  平安與奉獻 Pace e Offertorio
+                </Checkbox>
+                <Checkbox
+                  value={"pane"}
+                  isSelected={songTags.includes("pane")}
+                  onChange={(e) => toggleTags(e.target.value)}
+                >
+                  聖體 Frazione del pane
+                </Checkbox>
+                <Checkbox
+                  value={"comunione"}
+                  isSelected={songTags.includes("comunione")}
+                  onChange={(e) => toggleTags(e.target.value)}
+                >
+                  聖血 Communione
+                </Checkbox>
+                <Checkbox
+                  value={"finale"}
+                  isSelected={songTags.includes("finale")}
+                  onChange={(e) => toggleTags(e.target.value)}
+                >
+                  結束 Finale
+                </Checkbox>
+                <Checkbox
+                  value={"verginemaria"}
+                  isSelected={songTags.includes("verginemaria")}
+                  onChange={(e) => toggleTags(e.target.value)}
+                >
+                  聖母的歌曲 Canti della Vergine
+                </Checkbox>
+                <Checkbox
+                  value={"bambini"}
+                  isSelected={songTags.includes("bambini")}
+                  onChange={(e) => toggleTags(e.target.value)}
+                >
+                  小孩的歌曲 Canti della Bambini
+                </Checkbox>
+                <Checkbox
+                  value={"lodivespri"}
+                  isSelected={songTags.includes("lodivespri")}
+                  onChange={(e) => toggleTags(e.target.value)}
+                >
+                  晨禱與晚禱 Lodi e Vespri
+                </Checkbox>
+              </div>
             </div>
           </div>
         </CardBody>
       </Card>
       {/* Lyrics Lines Section */}
-      <Card className="w-3/4 self-center">
+      <Card className="w-[500px] self-center">
         <CardBody>
           <div className="flex flex-col gap-4">
             {lyricsWithChords.map((line, index) => (
@@ -367,6 +385,7 @@ export default function Home() {
                 {/* Lyrics Inputs */}
                 <Textarea
                   label="繁體歌詞 Testo (Caratteri)"
+                  className="h-14"
                   value={line.lyrics.character}
                   onChange={(e) =>
                     updateLine(index, {
@@ -375,21 +394,23 @@ export default function Home() {
                   }
                 />
                 {/* Chords Inputs */}
-                <div key={index} className="flex flex-col gap-2">
+                <div key={index} className="flex flex-col gap-2 ">
                   {line.chords.map((chord, i) => (
-                    <div key={i} className="flex gap-4 items-center">
+                    <div key={i} className="flex gap-5 items-center ">
                       <Input
                         label="和弦 Accordo"
-                        value={chord.chord}
+                        value={chord.chord.toUpperCase()}
+                        className="h-[50px]"
                         onChange={(e) => {
                           const updatedChords = [...line.chords];
-                          updatedChords[i].chord = e.target.value;
+                          updatedChords[i].chord = e.target.value.toUpperCase();
                           updateChords(index, updatedChords);
                         }}
                       />
                       <Input
                         label="C Position"
                         type="number"
+                        className="h-[50px]"
                         value={
                           chord.c_position === null ? "" : chord.c_position
                         }
@@ -434,7 +455,7 @@ export default function Home() {
                     </div>
                   ))}
                   <Button
-                    className="font-bold text-sm"
+                    className="font-bold text-sm  self-center"
                     onPress={() =>
                       updateChords(index, [
                         ...line.chords,
@@ -453,7 +474,7 @@ export default function Home() {
                     updateLine(index, { spacing: newSpacing });
                   }}
                 >
-                  新增空白 Aggiungi spazio
+                  新增歌詞底下空白 Aggiungi spazio sotto il testo
                 </Checkbox>
               </div>
             ))}
@@ -469,7 +490,7 @@ export default function Home() {
         <div className="w-1/2 flex flex-col ">
           <Card className="w-[375px] h-[680px]  flex self-center ml-10">
             <CardBody className="scrollbar-hide">
-              <LyricsScreen selectedSong={finalJson} />
+              <LyricsScreen key={trigger} selectedSong={finalJson} />
             </CardBody>
           </Card>
         </div>
