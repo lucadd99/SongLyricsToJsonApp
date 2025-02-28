@@ -28,9 +28,9 @@ const LyricsScreen = ({ selectedSong }: any) => {
   const [lyricsInPinYin, setLyricsInPinYin] = useState(false);
 
   useEffect(() => {
-    document.title = selectedSong?.title || "Song not found";
-    setLyricsData(selectedSong?.lyricsWithChords || []);
-  }, [selectedSong]);
+    document.title =  "lyrics and chords to Json format";
+    
+  }, []);
 
   if (!selectedSong) {
     return <div className="container error-text">Song not found.</div>;
@@ -143,9 +143,13 @@ const LyricsScreen = ({ selectedSong }: any) => {
                   style={{
                     left: `${
                       lyricsInPinYin
-                        ? singleChord.p_position
-                        : singleChord.c_position
-                    }ch`,
+                        ? singleChord.p_position === 0 
+                          ? 0 
+                          : singleChord.p_position * 10 - 5
+                        : singleChord.c_position === 0 
+                          ? 0 
+                          : singleChord.c_position * 10 - 5
+                    }px`,
                     fontSize: `${currentFontSize * 0.9}px`,
                   }}
                 >

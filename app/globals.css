@@ -112,7 +112,7 @@ body::-webkit-scrollbar {
 }
 
 .chord {
-  top: -20;
+  bottom: 20px;
   position: absolute;
   font-weight: 500;
   color: #c50000;
