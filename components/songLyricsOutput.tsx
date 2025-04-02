@@ -29,7 +29,6 @@ const LyricsScreen = ({ selectedSong }: any) => {
 
   useEffect(() => {
     document.title =  "lyrics and chords to Json format";
-    
   }, []);
 
   if (!selectedSong) {
@@ -79,7 +78,7 @@ const LyricsScreen = ({ selectedSong }: any) => {
 
   return (
     <>
-      <div className="action-button-container">
+      <div className="action-button-container hidden">
         <button className="action-button" onClick={toggleMenu}>
           {showMenu ? "x" : "✎"}
         </button>

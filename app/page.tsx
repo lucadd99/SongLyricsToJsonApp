@@ -1,6 +1,6 @@
 "use client";
 import { TitleFieldTop } from "@/components/TitleField-top";
-import { useEffect, useState } from "react";
+import { useEffect, useState ,useRef} from "react";
 import {
   Input,
   Card,
@@ -40,8 +40,12 @@ export default function Home() {
   const [lyricsWithChords, setLyricsWithChords] = useState<Line[]>([]);
 
   const [trigger, setTrigger] = useState(0); //for re-render
-
+  const lyricsScreenRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
+    // Save scroll position before update
+    const scrollContainer = lyricsScreenRef.current;
+    const scrollTop = scrollContainer?.scrollTop || 0;
+  
     setFinalJson({
       title: songTitle,
       page: songPage,
@@ -51,7 +55,15 @@ export default function Home() {
       tags: songTags,
       lyricsWithChords,
     });
+  
     setTrigger((prev) => prev + 1); // Force re-render
+
+    // Restore scroll position after update
+    requestAnimationFrame(() => {
+      if (scrollContainer) {
+        scrollContainer.scrollTop = scrollTop;
+      }
+    });
   }, [
     songTitle,
     songPage,
@@ -129,9 +141,9 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col items-start min-h-screen justify-start gap-8 p-5">
+    <div className="flex items-start flex-col  min-h-screen  gap-8 p-5">
       <TitleFieldTop />
-      <Card className="w-3/4 self-center">
+      <Card className="w-3/4">
         <CardBody>
           <div className="flex flex-col gap-4">
             <div className="flex flex-row gap-2">
@@ -338,7 +350,7 @@ export default function Home() {
         </CardBody>
       </Card>
       {/* Lyrics Lines Section */}
-      <Card className="w-[500px] self-center">
+      <Card className="w-[500px] ml-[10%]">
         <CardBody>
           <div className="flex flex-col gap-4">
             {lyricsWithChords.map((line, index) => (
@@ -493,15 +505,16 @@ export default function Home() {
         </CardBody>
       </Card>
 
-      {/* JSON Output */}
+   
       <div className="w-full flex self-center   max-md:flex-col max-md:items-center">
-        <div className="w-1/2 flex flex-col ">
-          <Card className="w-[375px] h-[680px]  flex self-center ml-10">
-            <CardBody className="scrollbar-hide">
+        <div className="fixed top-5 right-5 z-[999] ">
+          <Card className="w-[375px] h-[900px]  flex self-center ml-10">
+            <div className="scrollbar-hide overflow-scroll" ref={lyricsScreenRef}>
               <LyricsScreen key={trigger} selectedSong={finalJson} />
-            </CardBody>
+            </div>
           </Card>
         </div>
+        {/* JSON Output */}
         <Card className="w-[505px]  mb-40 max-md:w-full">
           <CardBody>
             <pre className="bg-gray-800 text-white p-4 rounded h-[600px] overflow-scroll scrollbar-hide">
