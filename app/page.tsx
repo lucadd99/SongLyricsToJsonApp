@@ -422,6 +422,14 @@ export default function Home() {
                           const updatedChords = [...line.chords];
                           updatedChords[i].c_position = value;
                           updateChords(index, updatedChords);
+                          // set pinyin chords position same as characters
+                          const valueP =
+                          e.target.value === ""
+                            ? null
+                            : Number(e.target.value);
+                        const updatedChordsP = [...line.chords];
+                        updatedChords[i].p_position = valueP;
+                        updateChords(index, updatedChordsP);
                         }}
                       />
                       {/* <Input
